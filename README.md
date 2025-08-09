@@ -80,7 +80,7 @@ npm run server
 4. Clique em "Entrar"
 5. Para cadastro, clique no link "aqui"
 
-![alt text](image.png)
+![alt text](./image.png)
 
 ---
 
