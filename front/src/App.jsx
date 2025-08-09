@@ -1,9 +1,11 @@
+import Path from "./path/Path"
+
 function App() {
 
   return (
-  <div>
-    <h1>Hello world</h1>
-  </div>
+  <>
+      <Path />
+  </>
   )
 }
 
