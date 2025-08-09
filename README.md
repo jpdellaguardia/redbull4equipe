@@ -5,11 +5,9 @@ Aplicação web full-stack com React + Vite no frontend e Express.js no backend.
 ## 🚀 Tecnologias
 
 ### Frontend
-- React 19
+- React 
 - Vite
 - TailwindCSS
-- React Router DOM
-- React Hook Form
 - Axios
 
 ### Backend
@@ -18,7 +16,6 @@ Aplicação web full-stack com React + Vite no frontend e Express.js no backend.
 - MySQL2
 - Prisma ORM
 - CORS
-- Dotenv
 
 ## 📁 Estrutura do Projeto
 
