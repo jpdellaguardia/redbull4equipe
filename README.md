@@ -31,25 +31,72 @@ redbull/
 
 ## ⚡ Instalação e Execução
 
-### Pré-requisitos
+### 🐳 Com Docker (Recomendado)
+
+**Pré-requisitos:**
+- Docker Desktop instalado
+- Docker Compose
+
+**Passos para executar:**
+
+1. **Limpar cache e containers antigos:**
+```bash
+cd redbull
+docker-compose down
+docker system prune -f
+```
+
+2. **Deletar package-lock.json desatualizado:**
+```bash
+del front\package-lock.json
+```
+
+3. **Executar todos os serviços:**
+```bash
+docker-compose up --build
+```
+
+**Comandos úteis:**
+```bash
+# Executar em background
+docker-compose up -d --build
+
+# Parar os serviços
+docker-compose down
+
+# Ver logs
+docker-compose logs
+
+# Reconstruir apenas um serviço
+docker-compose build --no-cache frontend
+```
+
+**Solução de problemas:**
+- Se houver erro `crypto.hash is not a function`, delete o `package-lock.json` e rebuild
+- Se o JSON Server não encontrar o arquivo, verifique se `src/server/db.json` existe
+- Para limpar completamente: `docker system prune -a`
+
+### 💻 Instalação Local
+
+**Pré-requisitos:**
 - Node.js (versão 18+)
 - MySQL
 
-### Backend
+**Backend:**
 ```bash
 cd redbull/back
 npm install
 npm start
 ```
 
-### Frontend
+**Frontend:**
 ```bash
 cd redbull/front
 npm install
 npm run dev
 ```
 
-### JSON Server (desenvolvimento)
+**JSON Server (desenvolvimento):**
 ```bash
 cd redbull/front
 npm run server
@@ -57,9 +104,16 @@ npm run server
 
 ## 🌐 URLs
 
+**Após executar com Docker:**
 - Frontend: http://localhost:5173
 - Backend: http://localhost:3000
 - JSON Server: http://localhost:3001
+- API Produtos: http://localhost:3001/products
+
+**Status dos serviços:**
+- ✅ Backend: "Servidor iniciado em http://localhost:3000"
+- ✅ JSON Server: "JSON Server started on PORT :3001"
+- ✅ Frontend: Deve iniciar sem erros crypto.hash
 
 ## 📱 Funcionalidades - Passo a Passo
 
@@ -182,6 +236,27 @@ npm run server
 
 
 ---
+
+## 🐛 Problemas Conhecidos e Soluções
+
+### Frontend não inicia (crypto.hash error)
+**Causa:** Incompatibilidade entre Vite 7+ e Node.js
+**Solução:**
+```bash
+del front\package-lock.json
+docker-compose build --no-cache frontend
+```
+
+### JSON Server não encontra db.json
+**Causa:** Caminho incorreto no container
+**Solução:** Arquivo deve estar em `src/server/db.json`
+
+### Containers não param corretamente
+**Solução:**
+```bash
+docker-compose down
+docker system prune -f
+```
 
 ## 🔧 Próximas Implementações
 

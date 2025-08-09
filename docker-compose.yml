@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./back
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./back:/app
+      - /app/node_modules
+    networks:
+      - redbull-network
+    restart: unless-stopped
+
+  frontend:
+    build: ./front
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./front:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - redbull-network
+    restart: unless-stopped
+
+  json-server:
+    build: ./front
+    ports:
+      - "3001:3001"
+    command: ["npx", "json-server", "--watch", "src/server/db.json", "--port", "3001", "--host", "0.0.0.0"]
+    volumes:
+      - ./front:/app
+      - /app/node_modules
+    networks:
+      - redbull-network
+
+networks:
+  redbull-network:
+    driver: bridge
